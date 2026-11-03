@@ -1,0 +1,1117 @@
+>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Shabnam', 'Vazir', Tahoma, Arial, sans-serif;
+            direction: rtl;
+            background: #fcf9f6;
+            color: #1a1816;
+            overflow-x: hidden;
+        }
+
+        /* =====================================================
+           SCROLLBAR
+           ===================================================== */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #fcf9f6; }
+        ::-webkit-scrollbar-thumb { background: #d4c5a9; border-radius: 10px; }
+
+        /* =====================================================
+           NAVBAR
+           ===================================================== */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 4rem;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(26, 24, 22, 0.04);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            transition: all 0.4s ease;
+        }
+
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.367);
+            padding: 0.8rem 4rem;
+            box-shadow: 0 4px 40px rgba(0, 0, 0, 0.04);
+        }
+
+        .logo a {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            text-decoration: none;
+            font-family: 'Shabnam', 'Vazir', Tahoma, sans-serif;
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: #1a1816;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .logo a::before {
+            content: '◆';
+            font-size: 1rem;
+            color: #b8a088;
+            font-weight: 100;
+        }
+
+        .logo a:hover { color: #b8a088; }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 0.1rem;
+            align-items: center;
+        }
+
+        .nav-links li a {
+            text-decoration: none;
+            color: #4a443c;
+            font-weight: 400;
+            font-size: 0.85rem;
+            padding: 0.5rem 1.2rem;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            letter-spacing: 1px;
+        }
+
+        .nav-links li a:hover {
+            background: rgba(184, 160, 136, 0.186);
+            color: #1a1816;
+        }
+
+        /* خانه (اول) */
+        .nav-links li:first-child a {
+            color: #1a1816;
+            font-weight: 500;
+            position: relative;
+        }
+
+        .nav-links li:first-child a::after {
+            content: '';
+            position: absolute;
+            bottom: 4px;
+            right: 50%;
+            transform: translateX(50%);
+            width: 20%;
+            height: 1.5px;
+            background: #b8a088;
+            border-radius: 10px;
+        }
+
+        /* ورود (آخرین li قبل از سبد) */
+        .nav-links li:nth-last-child(2) a {
+            border: 1px solid #d4c5a9;
+            color: #4a443c !important;
+            padding: 0.4rem 1.8rem !important;
+        }
+
+        .nav-links li:nth-last-child(2) a:hover {
+            background: #1a1816;
+            color: #fcf9f6 !important;
+            border-color: #1a1816;
+        }
+
+        /* سبد خرید */
+        .nav-links li:last-child a {
+            font-size: 1.2rem;
+            padding: 0.4rem 0.8rem !important;
+            position: relative;
+            color: #4a443c !important;
+        }
+
+        .nav-links li:last-child a::after {
+            content: '0';
+            position: absolute;
+            top: -2px;
+            right: -2px;
+            background: #b8a088;
+            color: #fcf9f6;
+            font-size: 0.5rem;
+            font-weight: 500;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* =====================================================
+           HAMBURGER
+           ===================================================== */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 5px;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 26px;
+            height: 1.5px;
+            background: #1a1816;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        /* =====================================================
+           HEADER WITH VIDEO
+           ===================================================== */
+        header {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            margin-top: 5px;
+        }
+
+        #heroVideo {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: cover;
+            z-index: 0;
+        }
+
+        header::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(156, 156, 156, 0.208);
+            z-index: 1;
+        }
+
+        .header-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            text-align: center;
+            color: white;
+            width: 90%;
+            max-width: 900px;
+            animation: fadeInUp 1.2s ease;
+        }
+
+        .header-content .badge {
+            display: inline-block;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.7rem;
+            letter-spacing: 4px;
+            font-weight: 300;
+            margin-bottom: 1rem;
+        }
+
+        .header-content h1 {
+            font-family: 'Shabnam', 'Vazir', Tahoma, sans-serif;
+            font-size: clamp(3rem, 10vw, 7rem);
+            font-weight: 500;
+            letter-spacing: 4px;
+            margin-bottom: 0.5rem;
+            color: white;
+            text-shadow: 0 4px 40px rgba(0, 0, 0, 0.2);
+            line-height: 1.2;
+        }
+
+        .header-content p {
+            font-family: 'Shabnam', 'Vazir', sans-serif !important;
+            font-size: clamp(1rem, 2vw, 1.6rem);
+            color: rgba(255, 255, 255, 0.9);
+            letter-spacing: 3px;
+            line-height: 2;
+            margin-top: 0.5rem;
+            font-weight: 300;
+        }
+
+        .header-content h1 .highlight {
+            color: #d4c5a9;
+            font-weight: 400;
+        }
+
+        .header-content .btn-hero {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 0.8rem 3rem;
+            background: rgb(213, 200, 168);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 400;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            transition: all 0.4s ease;
+        }
+
+        .header-content .btn-hero:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+        }
+
+        .header-content .btn-ghost {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.45);
+            margin-right: 0.8rem;
+        }
+
+        .header-content .btn-ghost:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translate(-50%, -40%); }
+            to   { opacity: 1; transform: translate(-50%, -50%); }
+        }
+
+        /* =====================================================
+           SCROLL INDICATOR
+           ===================================================== */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 26px;
+            height: 42px;
+            border: 1.5px solid rgba(255, 255, 255, 0.55);
+            border-radius: 20px;
+            z-index: 2;
+            display: flex;
+            justify-content: center;
+            padding-top: 7px;
+            transition: border-color 0.3s ease;
+        }
+
+        .scroll-indicator span {
+            width: 4px;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            animation: scrollDot 1.8s infinite;
+        }
+
+        .scroll-indicator:hover { border-color: #d4c5a9; }
+
+        @keyframes scrollDot {
+            0%   { transform: translateY(0);    opacity: 1; }
+            70%  { transform: translateY(12px); opacity: 0; }
+            100% { transform: translateY(0);    opacity: 0; }
+        }
+
+        /* =====================================================
+           HANDMADE BANNER
+           ===================================================== */
+        .handmade-banner {
+            padding: 5rem 4rem;
+            text-align: center;
+            background: #d4c5a9;
+            border-top: 1px solid rgba(184, 160, 136, 0.08);
+            border-bottom: 1px solid rgba(184, 160, 136, 0.08);
+        }
+
+        .handmade-banner h2 {
+            font-family: 'Shabnam', 'Vazir', Tahoma, sans-serif;
+            font-size: clamp(2rem, 4vw, 3.2rem);
+            font-weight: 400;
+            color: #1a1816;
+            letter-spacing: 3px;
+        }
+
+        .handmade-banner p {
+            color: #efe8e5;
+            font-size: clamp(0.9rem, 1.1vw, 1.05rem);
+            max-width: 600px;
+            margin: 1rem auto 0;
+            line-height: 2.2;
+            font-weight: 300;
+        }
+
+        .handmade-banner .divider {
+            display: inline-block;
+            width: 40px;
+            height: 1px;
+            background: #ffffff;
+            margin: 1.5rem 0;
+        }
+
+        /* =====================================================
+           SECTION HEADER (SHARED)
+           ===================================================== */
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header .tag {
+            color: #b8a088;
+            font-size: 0.7rem;
+            letter-spacing: 4px;
+            font-weight: 400;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-header h2 {
+            font-family: 'Shabnam', 'Vazir', Tahoma, sans-serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 500;
+            color: #1a1816;
+            letter-spacing: 2px;
+        }
+
+        .section-header p {
+            color: #8a8278;
+            margin-top: 0.5rem;
+            font-weight: 300;
+            font-size: 0.95rem;
+        }
+
+        /* =====================================================
+           ABOUT (NOW NEAR TOP) + FEATURES
+           ===================================================== */
+        .about-section {
+            padding: 6rem 4rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1.1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text p {
+            color: #4a443c;
+            font-size: 1rem;
+            line-height: 2.2;
+            font-weight: 300;
+            margin-bottom: 1.2rem;
+        }
+
+        .about-text strong {
+            color: #1a1816;
+            font-weight: 500;
+        }
+
+        .btn-dark {
+            background: #1a1816 !important;
+            color: #fcf9f6 !important;
+            border: 1px solid #1a1816 !important;
+            display: inline-block;
+            margin-top: 1rem;
+        }
+
+        .btn-dark:hover {
+            background: #2d2a24 !important;
+            transform: translateY(-3px);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.2rem;
+        }
+
+        .feature-card {
+            background: #ffffff;
+            border: 1px solid rgba(184, 160, 136, 0.1);
+            border-radius: 16px;
+            padding: 1.8rem 1.4rem;
+            text-align: center;
+            transition: all 0.4s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(184, 160, 136, 0.3);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.04);
+        }
+
+        .feature-icon {
+            font-size: 1.4rem;
+            color: #b8a088;
+            display: block;
+            margin-bottom: 0.8rem;
+        }
+
+        .feature-card h3 {
+            font-family: 'Shabnam', 'Vazir', Tahoma, sans-serif;
+            font-size: 1.05rem;
+            font-weight: 500;
+            color: #1a1816;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-card p {
+            color: #8a8278;
+            font-size: 0.82rem;
+            font-weight: 300;
+            line-height: 1.9;
+        }
+
+        /* =====================================================
+           PRODUCTS
+           ===================================================== */
+        .products {
+            background: #f7f2ec;
+            padding: 5rem 4rem;
+         
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+              gap: 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .product-card {
+            background: #ffffff;
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(184, 160, 136, 0.06);
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(184, 160, 136, 0.15);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.04);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 320px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .product-card:nth-child(1) .badge { color: #b8a088; }
+        .product-card:nth-child(1) .btn-add {
+            border-color: #b8a088;
+            color: #b8a088;
+        }
+        .product-card:nth-child(1) .btn-add:hover {
+            background: #b8a088;
+            color: white;
+        }
+
+        .product-card:nth-child(2) .badge { color: #c4b5a0; }
+        .product-card:nth-child(2) .btn-add {
+            border-color: #c4b5a0;
+            color: #c4b5a0;
+        }
+        .product-card:nth-child(2) .btn-add:hover {
+            background: #c4b5a0;
+            color: white;
+        }
+
+        .product-card:nth-child(3) .badge { color: #a8a09a; }
+        .product-card:nth-child(3) .btn-add {
+            border-color: #a8a09a;
+            color: #a8a09a;
+        }
+        .product-card:nth-child(3) .btn-add:hover {
+            background: #a8a09a;
+            color: white;
+        }
+
+        .product-info {
+            padding: 1.8rem 1.5rem 1.8rem;
+            text-align: center;
+        }
+
+        .product-card .badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 0.6rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            padding: 0.2rem 1rem;
+            border-radius: 30px;
+        }
+
+        .product-card h3 {
+            font-family: 'Shabnam', 'Vazir', Tahoma, sans-serif;
+            font-size: 1.3rem;
+            font-weight: 500;
+            color: #1a1816;
+            letter-spacing: 1px;
+        }
+
+        .product-card .subtitle {
+            color: #8a8278;
+            font-size: 0.78rem;
+            font-weight: 300;
+            letter-spacing: 2px;
+            margin-top: 0.4rem;
+        }
+
+        .product-card .btn-add {
+            background: transparent;
+            border: 1px solid;
+            padding: 0.5rem 2rem;
+            border-radius: 50px;
+            font-weight: 300;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            margin-top: 1.2rem;
+        }
+
+        .products-cta {
+            text-align: center;
+            margin-top: 3.5rem;
+        }
+
+        /* =====================================================
+           STORY CARDS (دسته‌بندی‌ها با عکس پس‌زمینه)
+           ===================================================== */
+        .story-section {
+            padding: 5rem 4rem;
+            background: #f7f2ec;
+        }
+
+        .story-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .story-card {
+            aspect-ratio: 9 / 16;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+            padding: 1.5rem;
+            text-align: center;
+            border: 1px solid rgba(184, 160, 136, 0.15);
+            transition: all 0.4s ease;
+            cursor: pointer;
+            /* تنظیمات پس‌زمینه */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            color: #fff; /* رنگ متن سفید برای خوانایی روی عکس */
+        }
+
+        /* لایه تاریک روی عکس برای خوانایی متن */
+        .story-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(82, 81, 81, 0.219); /* شدت تاریکی را اینجا تنظیم کنید */
+            z-index: 1;
+            transition: background 0.4s ease;
+        }
+
+        .story-card:hover::before {
+            background: rgba(182, 182, 182, 0.2); /* روشن‌تر شدن هنگام هاور */
+        }
+
+        .story-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        /* قرار دادن محتوا بالای لایه تاریک */
+        .story-card > * {
+            position: relative;
+            z-index: 2;
+        }
+
+        .story-card .story-icon {
+            font-size: 2rem;
+            color: #fcf9f6; /* رنگ آیکون */
+            line-height: 1;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+
+        .story-card h3 {
+            font-family: 'Shabnam', 'Vazir', Tahoma, sans-serif;
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: #ffffff;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.6);
+        }
+
+        .story-card p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.8rem;
+            font-weight: 300;
+            line-height: 1.9;
+            text-shadow: 0 1px 5px rgba(0,0,0,0.6);
+        }
+
+        .story-card .story-line {
+            width: 24px;
+            height: 1px;
+            background: #ffffff;
+            margin-top: 0.4rem;
+        }
+
+        /* =====================================================
+           TESTIMONIALS
+           ===================================================== */
+        .testimonials {
+            padding: 6rem 4rem;
+        }
+
+        .testimonials .section-header {
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .testimonial-card {
+            background: #ffffff;
+            border: 1px solid rgba(184, 160, 136, 0.1);
+            border-radius: 16px;
+            padding: 2.2rem 1.8rem;
+            text-align: center;
+            transition: all 0.4s ease;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.05);
+        }
+
+        .testimonial-card .stars {
+            color: #b8a088;
+            letter-spacing: 4px;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .testimonial-card p {
+            color: #4a443c;
+            font-size: 0.9rem;
+            font-weight: 300;
+            line-height: 2.1;
+        }
+
+        .testimonial-card .author {
+            display: block;
+            margin-top: 1.4rem;
+            color: #b8a088;
+            font-size: 0.78rem;
+            letter-spacing: 1px;
+        }
+
+        /* =====================================================
+           NEWSLETTER
+           ===================================================== */
+        .newsletter {
+            padding: 6rem 4rem;
+            background: #d4c5a9;
+        }
+
+        .newsletter-inner {
+            max-width: 620px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .newsletter-inner .tag {
+            color: #6b5d4a;
+            font-size: 0.7rem;
+            letter-spacing: 4px;
+            display: block;
+            margin-bottom: 0.6rem;
+        }
+
+        .newsletter-inner h2 {
+            font-family: 'Shabnam', 'Vazir', Tahoma, sans-serif;
+            font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+            font-weight: 500;
+            color: #1a1816;
+            letter-spacing: 2px;
+        }
+
+        .newsletter-inner p {
+            color: #4a443c;
+            font-weight: 300;
+            font-size: 0.92rem;
+            line-height: 2;
+            margin: 1rem 0 2rem;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 0.8rem;
+            max-width: 480px;
+            margin: 0 auto;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 0.8rem 1.4rem;
+            border: 1px solid rgba(26, 24, 22, 0.15);
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.7);
+            font-family: inherit;
+            font-size: 0.88rem;
+            color: #1a1816;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .newsletter-form input:focus {
+            border-color: #1a1816;
+            background: #ffffff;
+        }
+
+        .newsletter-form .btn-dark {
+            margin-top: 0;
+            padding: 0.8rem 2rem;
+            white-space: nowrap;
+            border-radius: 50px;
+        }
+
+        /* =====================================================
+           STORY (داستان ما — انتهای صفحه)
+           ===================================================== */
+        .our-story {
+            padding: 6rem 4rem;
+            background: #fcf9f6;
+            border-top: 1px solid rgba(184, 160, 136, 0.08);
+        }
+
+        .our-story-inner {
+            max-width: 820px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .our-story-inner .tag {
+            color: #b8a088;
+            font-size: 0.7rem;
+            letter-spacing: 4px;
+            display: block;
+            margin-bottom: 0.8rem;
+        }
+
+        .our-story-inner h2 {
+            font-family: 'Shabnam', 'Vazir', Tahoma, sans-serif;
+            font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+            font-weight: 500;
+            color: #1a1816;
+            letter-spacing: 2px;
+            margin-bottom: 2rem;
+        }
+
+        .our-story-inner p {
+            color: #4a443c;
+            font-size: 1rem;
+            font-weight: 300;
+            line-height: 2.3;
+            margin-bottom: 1.2rem;
+        }
+
+        .our-story-inner strong {
+            color: #1a1816;
+            font-weight: 500;
+        }
+
+        .our-story-inner .story-divider {
+            width: 40px;
+            height: 1px;
+            background: #b8a088;
+            margin: 2rem auto 0;
+        }
+
+        /* =====================================================
+           FOOTER
+           ===================================================== */
+        footer {
+            background: #1a1816;
+            color: #fcf9f6;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        footer .footer-logo {
+            font-family: 'Shabnam', 'Vazir', Tahoma, sans-serif;
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: #d4c5a9;
+            letter-spacing: 3px;
+        }
+
+        footer .footer-divider {
+            width: 40px;
+            height: 1px;
+            background: #b8a088;
+            margin: 1.5rem auto;
+        }
+
+        footer .footer-tagline {
+            color: #8a8278;
+            font-size: 0.85rem;
+            max-width: 400px;
+            margin: 0 auto;
+            line-height: 2;
+            font-weight: 300;
+        }
+
+        footer .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        footer .footer-links a {
+            color: #8a8278;
+            text-decoration: none;
+            font-size: 0.82rem;
+            letter-spacing: 1px;
+            transition: color 0.3s ease;
+        }
+
+        footer .footer-links a:hover { color: #d4c5a9; }
+
+        footer .footer-social {
+            margin-top: 2rem;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            font-size: 1.2rem;
+            color: #8a8278;
+        }
+
+        footer .footer-social span {
+            cursor: pointer;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        footer .footer-social span:hover {
+            transform: translateY(-3px);
+            color: #d4c5a9;
+        }
+
+        footer .footer-copy {
+            color: #4a443c;
+            font-size: 0.7rem;
+            margin-top: 2.5rem;
+            letter-spacing: 1px;
+        }
+
+        /* =====================================================
+           REVEAL ANIMATION
+           ===================================================== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+        .reveal.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* =====================================================
+           RESPONSIVE
+           ===================================================== */
+        @media (max-width: 992px) {
+            .navbar { padding: 1rem 2rem; }
+            .navbar.scrolled { padding: 0.8rem 2rem; }
+            header { margin-top: 64px; }
+            .product-grid { grid-template-columns: repeat(2, 1fr); }
+            .products { padding: 4rem 2rem; }
+            .handmade-banner { padding: 4rem 2rem; }
+            .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+            .testimonial-grid { grid-template-columns: 1fr 1fr; }
+            .story-grid { grid-template-columns: repeat(2, 1fr); }
+            .about-section,
+            .testimonials,
+            .story-section,
+            .newsletter,
+            .our-story { padding: 4rem 2rem; }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 0.8rem 1.2rem;
+                flex-wrap: nowrap; /* جلوگیری از شکستن */
+                justify-content: space-between; /* فاصله بین لوگو و همبرگر */
+            }
+            .navbar.scrolled { padding: 0.6rem 1.2rem; }
+
+            .hamburger { display: flex; }
+
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                width: 100%;
+                background: rgba(252, 249, 246, 0.98);
+                backdrop-filter: blur(10px);
+                padding: 1.5rem;
+                border-radius: 0 0 12px 12px;
+                gap: 0.2rem;
+                border: 1px solid rgba(184, 160, 136, 0.08);
+                box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            }
+
+            .nav-links.active { display: flex; }
+
+            .nav-links li { width: 100%; }
+
+            .nav-links li a {
+                width: 100%;
+                text-align: center;
+                padding: 0.7rem !important;
+                display: block;
+            }
+
+            .nav-links li:first-child a::after { display: none; }
+            
+            /* تنظیم سبد خرید در منوی موبایل */
+            .nav-links li:last-child a {
+                display: inline-block;
+                width: auto;
+                margin: 0 auto;
+            }
+
+            header { height: 70vh; margin-top: 60px; }
+            
+            /* تنظیم ویدیو برای موبایل */
+            #heroVideo {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            .header-content h1 { font-size: 3rem; } /* فونت کوچکتر برای موبایل */
+            .header-content p { font-size: 1.1rem; letter-spacing: 1px; }
+            .header-content .btn-hero { padding: 0.7rem 2rem; font-size: 0.8rem; }
+
+            .product-grid {
+                grid-template-columns: 1fr;
+                max-width: 400px;
+                margin: 0 auto;
+            }
+
+            .product-image { height: 250px; }
+
+            .handmade-banner { padding: 3rem 1.5rem; }
+            .products { padding: 3rem 1rem; }
+
+            .about-section,
+            .testimonials,
+            .story-section,
+            .newsletter,
+            .our-story { padding: 3rem 1.2rem; }
+
+            .testimonial-grid {
+                grid-template-columns: 1fr;
+                max-width: 420px;
+                margin: 0 auto;
+            }
+
+            /* تنظیم دسته‌بندی‌ها برای موبایل */
+            .story-grid {
+                grid-template-columns: 1fr 1fr;
+                max-width: 480px;
+                margin: 0 auto;
+            }
+            .story-card {
+                aspect-ratio: 3 / 4; /* تناسب بهتر برای موبایل */
+                padding: 1rem;
+            }
+            .story-card h3 { font-size: 1rem; }
+            .story-card p { font-size: 0.7rem; }
+
+            .newsletter-form { flex-direction: column; }
+            .newsletter-form .btn-dark { width: 100%; }
+
+            .header-content .btn-ghost {
+                margin-right: 0;
+                margin-top: 0.6rem;
+            }
+
+            .header-content .btn-hero { display: inline-block; }
+            .scroll-indicator { display: none; }
+        }
+
+        @media (max-width: 480px) {
+            .navbar { padding: 0.6rem 0.8rem; }
+            .logo a { font-size: 1.2rem; letter-spacing: 1px; }
+            .logo a::before { font-size: 0.8rem; }
+            header { height: 65vh; margin-top: 56px; }
+            .header-content h1 { font-size: 2.5rem; }
+            .product-image { height: 200px; }
+            .features-grid { grid-template-columns: 1fr; }
+            .story-grid { grid-template-columns: 1fr 1fr; gap: 0.6rem; }
+            .story-card { aspect-ratio: 3 / 4; padding: 1rem; }
+            .story-card .story-icon { font-size: 1.5rem; }
+            .story-card h3 { font-size: 0.85rem; }
+            .story-card p { font-size: 0.68rem; }
+        }
